@@ -12,14 +12,15 @@ function CounterBlock({title, counterType}){
     const day = String(currentDate.getDate()).padStart(2, "0");
     const hours = String(currentDate.getHours()).padStart(2, "0");
     const minutes = String(currentDate.getMinutes()).padStart(2, "0");
-    return `${year}-${month}-${day}D${hours}:${minutes}`;
+    const seconds = String(currentDate.getSeconds()).padStart(2, "0");
+    return `${year}-${month}-${day}D${hours}:${minutes}:${seconds}`;
   }
 
   const updateCounter = (updateType, newCount) => {
     const date = getFormattedDate();
     setCount(newCount);
     setLastUpdate(date);
-    console.log(`${updateType} ${date}`);
+    console.log(`${updateType} ${counterType} ${date}`);
   }
 
   const handleIncrement = () => {
@@ -53,13 +54,13 @@ function CounterBlock({title, counterType}){
     <div className="counter-block">
         <h3>{title}</h3>
         <h2> {count} </h2>
-        <button onClick={handleDecrement} className = "btn decrement" disabled={count <= 0}>-</button>
-        <button onClick={handleIncrement} className = "btn increment">+</button>
-        <button onClick={handleManualSet} className = "btn manualset"> set </button>
+        <div className="button-group">
+          <button onClick={handleDecrement} className = "btn decrement" disabled={count <= 0}>-</button>
+          <button onClick={handleIncrement} className = "btn increment">+</button>
+          <button onClick={handleManualSet} className = "btn manualset">?</button>
+        </div>
     </div>
   )
-
-
 }
 
 export default CounterBlock
